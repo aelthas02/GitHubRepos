@@ -1,20 +1,8 @@
-<div class="">
-  <a class="row" [href]="repoList[0].htmlUrl" target="_blank">
-    <img class="rounded img m-3" [src]="repoList[0].avatarUrl">
-    <h2 class="mt-4">{{repoList[0].ownerName}}</h2>
+<div>
+  <a class="row" [href]="owner.url" target="_blank">
+    <img class="rounded img m-3" [src]="owner.avatarUrl">
+    <h2 class="mt-4">{{owner.login}}</h2>
   </a>
 </div>
-<table class="table ">
-  <thead>
-    <tr>
-      <th>Nome do repositório</th>
-      <th>Descrição</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let repo of repoList;">
-      <td>{{repo.name}}</td>
-      <td>{{repo.description}}</td>
-    </tr>
-  </tbody>
-</table>
+<app-repos-table [nickname]="nickname" [starred]="true"></app-repos-table>
+<app-repos-table [nickname]="nickname"></app-repos-table>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Owner } from 'src/app/services/DTOs/Owner';
 import { Repo } from 'src/app/services/DTOs/Repo';
 import { GitHubService } from 'src/app/services/git-hub.service';
 
@@ -10,7 +11,8 @@ import { GitHubService } from 'src/app/services/git-hub.service';
 })
 export class ListComponent implements OnInit {
 
-  public repoList: Array<Repo>;
+  public owner: Owner;
+  public nickname: string;
 
   constructor(
     private router: ActivatedRoute,
@@ -18,32 +20,29 @@ export class ListComponent implements OnInit {
   ) { }
 
   public async ngOnInit(): Promise<void> {
-    await this.getRepoList();
+    await this.getNickname();
   }
 
-  private async getRepoList(): Promise<void> {
-    await this.router.queryParams.subscribe(
-      queryParams => this.getRepoListByNinkname(queryParams.nickname)
+  private getNickname(): void {
+    this.router.queryParams.subscribe(
+      queryParams => {
+        this.nickname = queryParams.nickname;
+        this.getGitHubOwner(this.nickname);
+      }
     );
   }
 
-  private getRepoListByNinkname(nickname: string) {
-    this.gitHubService.getReposByNickname(nickname).subscribe(
-      response => this.repoList = this.setRepoObject(response)
+  private getGitHubOwner(nickname: string) {
+    this.gitHubService.getGitHubOwner(nickname).subscribe(
+      response => this.setOwnerObject(response)
     );
   }
 
-  private setRepoObject(response): Repo[] {
-    const repoArray: Array<Repo> = response.map(
-      element => ({
-        avatarUrl: element.owner.avatar_url,
-        ownerName: element.owner.login,
-        htmlUrl: element.owner.html_url,
-        name: element.name,
-        description: element.description,
-        url: element.url
-      })
-    );
-    return repoArray;
+  private setOwnerObject(response): void {
+    this.owner = {
+      login: response.login,
+      avatarUrl: response.avatar_url,
+      url: response.html_url,
+    };
   }
 }

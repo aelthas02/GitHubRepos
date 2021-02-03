@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { ListComponent } from './components/list/list.component';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ReposTableComponent } from './components/list/repos-table/repos-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
-    HeaderComponent
+    HeaderComponent,
+    ReposTableComponent
   ],
   imports: [
     FormsModule,
