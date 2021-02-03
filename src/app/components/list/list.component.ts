@@ -13,6 +13,7 @@ export class ListComponent implements OnInit {
 
   public owner: Owner;
   public nickname: string;
+  public loading = true;
 
   constructor(
     private router: ActivatedRoute,
@@ -44,5 +45,6 @@ export class ListComponent implements OnInit {
       avatarUrl: response.avatar_url,
       url: response.html_url,
     };
+    this.loading = false;
   }
 }

@@ -1,4 +1,9 @@
-<table class="table ">
+<div class="d-flex justify-content-center m-4" *ngIf="loading === true">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<table class="table" *ngIf="repoList && repoList.length > 0 && loading === false">
   <thead>
     <tr>
       <th>Nome do repositório</th>
@@ -12,3 +17,7 @@
     </tr>
   </tbody>
 </table>
+<div *ngIf="repoList && repoList.length === 0 && loading === false" class="justify-content-center m-2">
+  <span *ngIf="!starred" >Este usuário não possúi repositórios</span>
+  <span *ngIf="starred" >Este usuário não possúi repositórios marcados com estrela</span>
+</div>

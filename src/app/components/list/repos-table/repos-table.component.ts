@@ -13,6 +13,7 @@ export class ReposTableComponent implements OnInit {
   @Input() starred = false;
 
   public repoList: Array<Repo>;
+  public loading = true;
 
   constructor(
     private gitHubService: GitHubService
@@ -47,6 +48,7 @@ export class ReposTableComponent implements OnInit {
         url: element.url
       })
     );
+    this.loading = false;
     return repoArray;
   }
 
