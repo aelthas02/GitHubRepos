@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Owner } from 'src/app/services/DTOs/Owner';
-import { Repo } from 'src/app/services/DTOs/Repo';
 import { GitHubService } from 'src/app/services/git-hub.service';
 
 @Component({
@@ -14,14 +13,15 @@ export class ListComponent implements OnInit {
   public owner: Owner;
   public nickname: string;
   public loading = true;
+  public selectedTab = 1;
 
   constructor(
     private router: ActivatedRoute,
     private gitHubService: GitHubService
   ) { }
 
-  public async ngOnInit(): Promise<void> {
-    await this.getNickname();
+  public ngOnInit(): void {
+    this.getNickname();
   }
 
   private getNickname(): void {
@@ -33,7 +33,7 @@ export class ListComponent implements OnInit {
     );
   }
 
-  private getGitHubOwner(nickname: string) {
+  private getGitHubOwner(nickname: string): void {
     this.gitHubService.getGitHubOwner(nickname).subscribe(
       response => this.setOwnerObject(response)
     );
@@ -46,5 +46,9 @@ export class ListComponent implements OnInit {
       url: response.html_url,
     };
     this.loading = false;
+  }
+
+  public setTab(value: number) {
+    this.selectedTab = value;
   }
 }

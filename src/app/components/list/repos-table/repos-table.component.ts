@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Repo } from 'src/app/services/DTOs/Repo';
 import { GitHubService } from 'src/app/services/git-hub.service';
 
@@ -7,10 +7,15 @@ import { GitHubService } from 'src/app/services/git-hub.service';
   templateUrl: './repos-table.component.html',
   styleUrls: ['./repos-table.component.scss']
 })
-export class ReposTableComponent implements OnInit {
+export class ReposTableComponent {
 
-  @Input() nickname: string;
   @Input() starred = false;
+  @Input()
+  set nickname(nickname: string) {
+    this.starred ?
+    this.getRepoStarredListByNinkname(nickname) :
+    this.getRepoListByNinkname(nickname);
+  }
 
   public repoList: Array<Repo>;
   public loading = true;
@@ -19,20 +24,14 @@ export class ReposTableComponent implements OnInit {
     private gitHubService: GitHubService
   ) { }
 
-  ngOnInit() {
-    this.starred ?
-    this.getRepoStarredListByNinkname() :
-    this.getRepoListByNinkname();
-  }
-
-  private getRepoListByNinkname() {
-    this.gitHubService.getReposByNickname(this.nickname).subscribe(
+  private getRepoListByNinkname(nickname: string): void {
+    this.gitHubService.getReposByNickname(nickname).subscribe(
       response => this.repoList = this.setRepoObject(response)
     );
   }
 
-  private getRepoStarredListByNinkname() {
-    this.gitHubService.getStarredReposByNickname(this.nickname).subscribe(
+  private getRepoStarredListByNinkname(nickname: string): void {
+    this.gitHubService.getStarredReposByNickname(nickname).subscribe(
       response => this.repoList = this.setRepoObject(response)
     );
   }
@@ -40,12 +39,9 @@ export class ReposTableComponent implements OnInit {
   private setRepoObject(response): Repo[] {
     const repoArray: Array<Repo> = response.map(
       element => ({
-        avatarUrl: element.owner.avatar_url,
-        ownerName: element.owner.login,
-        htmlUrl: element.owner.html_url,
         name: element.name,
         description: element.description,
-        url: element.url
+        url: element.html_url
       })
     );
     this.loading = false;

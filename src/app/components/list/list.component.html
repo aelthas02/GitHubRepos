@@ -10,5 +10,15 @@
   </a>
 </div>
 
-<app-repos-table [nickname]="nickname" [starred]="true"></app-repos-table>
-<app-repos-table [nickname]="nickname"></app-repos-table>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <span [class]="selectedTab === 1 ? 'nav-link active' : 'nav-link'" (click)="setTab(1)">Todos</span>
+  </li>
+  <li class="nav-item">
+    <span [class]="selectedTab === 2 ? 'nav-link active' : 'nav-link'" (click)="setTab(2)">Favoritos</span>
+  </li>
+</ul>
+<div class="mx-3">
+  <app-repos-table [nickname]="nickname" *ngIf="selectedTab === 1"></app-repos-table>
+  <app-repos-table [nickname]="nickname" [starred]="true" *ngIf="selectedTab === 2"></app-repos-table>
+</div>

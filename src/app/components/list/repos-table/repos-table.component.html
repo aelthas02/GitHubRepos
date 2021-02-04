@@ -1,19 +1,22 @@
-<div class="d-flex justify-content-center m-4" *ngIf="loading === true">
+<div class="d-flex justify-content-center mx-4" *ngIf="loading === true">
   <div class="spinner-border" role="status">
     <span class="sr-only">Loading...</span>
   </div>
 </div>
 <table class="table" *ngIf="repoList && repoList.length > 0 && loading === false">
-  <thead>
-    <tr>
-      <th>Nome do repositório</th>
-      <th>Descrição</th>
+  <thead class="thead-dark">
+    <tr class="row">
+      <th  class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Nome do repositório</th>
+      <th  class="col-xs-8 col-sm-8 col-md-8 col-lg-8">Descrição</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let repo of repoList;">
-      <td>{{repo.name}}</td>
-      <td>{{repo.description}}</td>
+    <tr class="row" *ngFor="let repo of repoList;">
+      <td  class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <i class="bi bi-star-fill mr-2" *ngIf="starred"></i>
+        <a [href]="repo.url" target="_blank">{{repo.name}}</a>
+      </td>
+      <td  class="col-xs-8 col-sm-8 col-md-8 col-lg-8">{{repo.description}}</td>
     </tr>
   </tbody>
 </table>
