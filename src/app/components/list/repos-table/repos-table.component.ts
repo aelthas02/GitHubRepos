@@ -29,14 +29,14 @@ export class ReposTableComponent {
   private getRepoListByNinkname(nickname: string): void {
     this.gitHubService.getReposByNickname(nickname).subscribe(
       response => this.repoList = this.setRepoObject(response),
-      error => this.toastrService.error('A lista de repositórios não pode ser carregada.', 'Erro', error)
+      error => this.toastrService.error('A lista de repositórios não pôde ser carregada.', 'Erro', error)
     );
   }
 
   private getRepoStarredListByNinkname(nickname: string): void {
     this.gitHubService.getStarredReposByNickname(nickname).subscribe(
       response => this.repoList = this.setRepoObject(response),
-      error => this.toastrService.error('A lista de repositórios não pode ser carregada.', 'Erro', error)
+      error => this.toastrService.error('A lista de repositórios favoritos não pôde ser carregada.', 'Erro', error)
     );
   }
 

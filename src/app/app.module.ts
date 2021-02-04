@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ReposTableComponent } from './components/list/repos-table/repos-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     HeaderComponent,
-    ReposTableComponent
+    ReposTableComponent,
+    HomeComponent
   ],
   imports: [
     BrowserAnimationsModule,
