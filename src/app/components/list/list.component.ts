@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Owner } from 'src/app/services/DTOs/Owner';
 import { GitHubService } from 'src/app/services/git-hub.service';
 
@@ -17,7 +18,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private router: ActivatedRoute,
-    private gitHubService: GitHubService
+    private gitHubService: GitHubService,
+    private toastrService: ToastrService
   ) { }
 
   public ngOnInit(): void {
@@ -35,7 +37,8 @@ export class ListComponent implements OnInit {
 
   private getGitHubOwner(nickname: string): void {
     this.gitHubService.getGitHubOwner(nickname).subscribe(
-      response => this.setOwnerObject(response)
+      response => this.setOwnerObject(response),
+      error => this.toastrService.error('Usuário não encontrado.', 'Erro', error)
     );
   }
 

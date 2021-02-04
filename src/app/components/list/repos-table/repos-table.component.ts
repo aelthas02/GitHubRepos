@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Repo } from 'src/app/services/DTOs/Repo';
 import { GitHubService } from 'src/app/services/git-hub.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-repos-table',
@@ -21,18 +22,21 @@ export class ReposTableComponent {
   public loading = true;
 
   constructor(
-    private gitHubService: GitHubService
+    private gitHubService: GitHubService,
+    private toastrService: ToastrService
   ) { }
 
   private getRepoListByNinkname(nickname: string): void {
     this.gitHubService.getReposByNickname(nickname).subscribe(
-      response => this.repoList = this.setRepoObject(response)
+      response => this.repoList = this.setRepoObject(response),
+      error => this.toastrService.error('A lista de repositórios não pode ser carregada.', 'Erro', error)
     );
   }
 
   private getRepoStarredListByNinkname(nickname: string): void {
     this.gitHubService.getStarredReposByNickname(nickname).subscribe(
-      response => this.repoList = this.setRepoObject(response)
+      response => this.repoList = this.setRepoObject(response),
+      error => this.toastrService.error('A lista de repositórios não pode ser carregada.', 'Erro', error)
     );
   }
 
