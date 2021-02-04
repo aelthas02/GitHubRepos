@@ -3,6 +3,7 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
+
 <table class="table" *ngIf="repoList && repoList.length > 0 && loading === false">
   <thead class="thead-dark">
     <tr class="row">
@@ -20,7 +21,21 @@
     </tr>
   </tbody>
 </table>
-<div *ngIf="repoList && repoList.length === 0 && loading === false" class="justify-content-center m-2">
-  <span *ngIf="!starred" >Este usuário não possúi repositórios</span>
-  <span *ngIf="starred" >Este usuário não possúi repositórios marcados com estrela</span>
+<nav>
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <span class="page-link" (click)="previousPage()" *ngIf="selectedPage !== 1">&laquo;</span>
+    </li>
+    <li class="page-item" *ngFor="let page of setPages(totalPages); let i = index;">
+      <span [class]="selectedPage === i ? 'page-link selected-page' : 'page-link'" (click)="selectPage(i)" *ngIf="i > 0">{{i}}</span>
+    </li>
+    <li class="page-item">
+      <span class="page-link" (click)="nextPage()" *ngIf="selectedPage !== totalPages">&raquo;</span>
+    </li>
+  </ul>
+</nav>
+
+<div *ngIf="repoList && repoList.length === 0 && loading === false" class="text-center m-2">
+  <span *ngIf="!starred">Este usuário não possúi repositórios</span>
+  <span *ngIf="starred">Este usuário não possúi repositórios marcados com estrela</span>
 </div>

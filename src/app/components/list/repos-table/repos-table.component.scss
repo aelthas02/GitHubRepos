@@ -5,3 +5,10 @@
 .bi-star-fill {
   color: #0d6efd;
 }
+.page-link {
+  cursor: pointer;
+}
+.selected-page {
+  font-weight: bold;
+  background-color: #EEE !important;
+}

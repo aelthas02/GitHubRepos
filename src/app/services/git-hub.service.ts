@@ -17,12 +17,12 @@ export class GitHubService {
     return this.http.get<any>(`https://api.github.com/users/${nickname}`);
   }
 
-  public getReposByNickname(nickname: string): Observable<Array<Repo>> {
-    return this.http.get<any>(`https://api.github.com/users/${nickname}/repos?per_page=50`);
+  public getReposByNicknameAndPage(nickname: string, page?: number): Observable<Array<Repo>> {
+    return this.http.get<any>(`https://api.github.com/users/${nickname}/repos?per_page=10&page=${page ? page : 1}`);
   }
 
-  public getStarredReposByNickname(nickname: string): Observable<Array<Repo>> {
-    return this.http.get<any>(`https://api.github.com/users/${nickname}/starred`);
+  public getStarredReposByNickname(nickname: string, page?: number): Observable<Array<Repo>> {
+    return this.http.get<any>(`https://api.github.com/users/${nickname}/starred?per_page=10&page=${page ? page : 1}`);
   }
 
 }

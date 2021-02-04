@@ -15,6 +15,7 @@ export class ListComponent implements OnInit {
   public nickname: string;
   public loading = true;
   public selectedTab = 1;
+  public totalPages = 0;
 
   constructor(
     private router: ActivatedRoute,
@@ -48,6 +49,7 @@ export class ListComponent implements OnInit {
       avatarUrl: response.avatar_url,
       url: response.html_url,
     };
+    this.totalPages = Math.ceil(response.public_repos / 10);
     this.loading = false;
   }
 
