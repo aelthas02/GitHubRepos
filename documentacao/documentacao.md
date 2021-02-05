@@ -110,3 +110,9 @@ Como mostra o código acima, a aplicação utiliza a biblioteca HttpClient para 
 A aplicação utiliza a biblioteca `ngx-toastr` em todos os requests codificados, para exibir um aviso quando um request foi mal-sucedido, como mostram os exemplos a seguir:
 
 ![](./toastr_layout.PNG)
+
+&nbsp;
+
+# Hospedagem em servidor cloud
+A aplicação utiliza os serviços da plataforma [Vercel](https://vercel.com/) que os disponibiliza de forma gratuita para fins de estudos, hobbies e etc.
+Ao atualizar o repositório no GitHub, como ambas as plataformas estão interligadas, a aplicação automaticamente autaliza comforme as mudanças são feitas.
