@@ -9,8 +9,11 @@
     <h2 class="mt-4">{{owner.login}}</h2>
   </a>
 </div>
+<div *ngIf="!owner && loading === false" class="text-center">
+  <span>404: Usuário não encontrado</span>
+</div>
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs" *ngIf="owner && loading === false">
   <li class="nav-item">
     <span [class]="selectedTab === 1 ? 'nav-link active' : 'nav-link'" (click)="setTab(1)">Todos</span>
   </li>
@@ -18,7 +21,7 @@
     <span [class]="selectedTab === 2 ? 'nav-link active' : 'nav-link'" (click)="setTab(2)">Favoritos</span>
   </li>
 </ul>
-<div class="mx-3">
+<div class="mx-3" *ngIf="owner && loading === false">
   <app-repos-table [setNickname]="nickname" [totalPages]="totalPages" *ngIf="selectedTab === 1"></app-repos-table>
   <app-repos-table [setNickname]="nickname" [starred]="true" *ngIf="selectedTab === 2"></app-repos-table>
 </div>

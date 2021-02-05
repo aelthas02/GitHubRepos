@@ -39,7 +39,10 @@ export class ListComponent implements OnInit {
   private getGitHubOwner(nickname: string): void {
     this.gitHubService.getGitHubOwner(nickname).subscribe(
       response => this.setOwnerObject(response),
-      error => this.toastrService.error('Usuário não pôde ser encontrado.', 'Erro', error)
+      error => {
+        this.toastrService.error('Usuário não pôde ser encontrado.', 'Erro', error);
+        this.loading = false;
+      }
     );
   }
 
