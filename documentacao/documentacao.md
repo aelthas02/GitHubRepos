@@ -102,6 +102,7 @@ Serviços são os responsáveis por realizar requisições à API do GitHub e re
 ![](./services_codigo.PNG)
 
 Como mostra o código acima, a aplicação utiliza a biblioteca HttpClient para realizar os requests e retorna os resultados como um Observable. 
+> Na pasta de serviços, há uma subpasta contendo os DTOs para facilitar a manipulação de dados e a instanciação de objetos.
 
 &nbsp;
 

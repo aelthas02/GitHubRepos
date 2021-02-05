@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from './sso.config';
 
 @Component({
@@ -19,15 +19,6 @@ export class AppComponent {
 
   private configureSingleSignOn(): void {
     this.oauthService.configure(authCodeFlowConfig);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
-  }
-
-  public login() {
-    this.oauthService.initImplicitFlow();
-  }
-
-  public logout() {
-    this.oauthService.logOut();
+    // this.oauthService.loadDiscoveryDocumentAndLogin();
   }
 }
