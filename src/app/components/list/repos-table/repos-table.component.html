@@ -21,7 +21,7 @@
     </tr>
   </tbody>
 </table>
-<nav>
+<nav *ngIf="totalPages > 0">
   <ul class="pagination justify-content-center">
     <li class="page-item">
       <span class="page-link" (click)="previousPage()" *ngIf="selectedPage !== 1">&laquo;</span>

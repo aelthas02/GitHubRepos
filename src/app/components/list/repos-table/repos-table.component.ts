@@ -13,12 +13,12 @@ export class ReposTableComponent {
   @Input() starred = false;
   @Input() totalPages = 0;
   @Input()
-  set nickname(nickname: string) {
-    this._nickname = nickname;
+  set setNickname(nickname: string) {
+    this.nickname = nickname;
     this.selectList(nickname);
   }
 
-  public _nickname: string;
+  public nickname: string;
   public repoList: Array<Repo>;
   public loading = true;
   public selectedPage = 1;
@@ -42,7 +42,7 @@ export class ReposTableComponent {
   }
 
   private getRepoStarredListByNinkname(nickname: string): void {
-    this.gitHubService.getStarredReposByNickname(nickname, this.selectedPage).subscribe(
+    this.gitHubService.getStarredReposByNickname(nickname).subscribe(
       response => this.repoList = this.setRepoObject(response),
       error => this.toastrService.error('A lista de repositórios favoritos não pôde ser carregada.', 'Erro', error)
     );
@@ -62,17 +62,17 @@ export class ReposTableComponent {
 
   public selectPage(page: number): void {
     this.selectedPage = page;
-    this.selectList(this._nickname);
+    this.selectList(this.nickname);
   }
 
   public nextPage(): void {
     this.selectedPage++;
-    this.selectList(this._nickname);
+    this.selectList(this.nickname);
   }
 
   public previousPage(): void {
     this.selectedPage--;
-    this.selectList(this._nickname);
+    this.selectList(this.nickname);
   }
 
   public setPages(n: number): number[] {

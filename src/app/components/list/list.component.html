@@ -19,6 +19,6 @@
   </li>
 </ul>
 <div class="mx-3">
-  <app-repos-table [nickname]="nickname" [totalPages]="totalPages" *ngIf="selectedTab === 1"></app-repos-table>
-  <app-repos-table [nickname]="nickname" [totalPages]="totalPages" [starred]="true" *ngIf="selectedTab === 2"></app-repos-table>
+  <app-repos-table [setNickname]="nickname" [totalPages]="totalPages" *ngIf="selectedTab === 1"></app-repos-table>
+  <app-repos-table [setNickname]="nickname" [starred]="true" *ngIf="selectedTab === 2"></app-repos-table>
 </div>
